@@ -1,20 +1,19 @@
 import colors from "colors";
-import { pausa, showMenu } from "./helpers/messages.js";
+// import { pausa, showMenu } from "./helpers/messages.js";
+import { inquirerMenu, pause } from "./helpers/inquirer.js";
 
 const main = async () => {
   console.clear();
   let opt;
   try {
     do {
-      opt = await showMenu();
-      if(isNaN(opt)){
-        console.log(`\nNo se aceptan letras, por favor introduce valores numéricos`)
-      }
-      await pausa();
+      opt = await inquirerMenu();    
+      console.log({opt})
+      await pause();
     } while (opt !== 0);
   } catch (error) {
     console.log(error);
   }
 };
 
-main()
+main();
