@@ -2,6 +2,7 @@ import colors from "colors";
 // import { pausa, showMenu } from "./helpers/messages.js";
 import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js";
 import Tasks from "./models/tasks.js";
+import { saveDB } from "./helpers/saveFile.js";
 
 const main = async () => {
   console.clear();
@@ -17,9 +18,12 @@ const main = async () => {
           tasks.createTask(desc);
           break;
         case 2:
-          console.log(tasks._list);
+          console.log(tasks.arrayList)
           break;
       }
+
+      // saveDB(tasks.arrayList);
+
       await pause();
     } while (opt !== 0);
   } catch (error) {
