@@ -1,14 +1,25 @@
 import colors from "colors";
 // import { pausa, showMenu } from "./helpers/messages.js";
-import { inquirerMenu, pause } from "./helpers/inquirer.js";
+import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js";
+import Tasks from "./models/tasks.js";
 
 const main = async () => {
   console.clear();
   let opt;
+  const tasks = new Tasks();
   try {
     do {
-      opt = await inquirerMenu();    
-      console.log({opt})
+      opt = await inquirerMenu();
+      switch (opt) {
+        case 1:
+          //crear opcion
+          const desc = await readInput('Description:');
+          tasks.createTask(desc);
+          break;
+        case 2:
+          console.log(tasks._list);
+          break;
+      }
       await pause();
     } while (opt !== 0);
   } catch (error) {
