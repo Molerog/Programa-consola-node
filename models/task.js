@@ -3,12 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 class Task {
   id = "";
   desc = "";
-  completadoEn = null;
+  completed = null;
 
   constructor(desc) {
     this.id = uuidv4();
     this.desc = desc;
-    this.completadoEn = null;
+    this.completed = null;
   }
 }
 

@@ -2,12 +2,17 @@ import colors from "colors";
 // import { pausa, showMenu } from "./helpers/messages.js";
 import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js";
 import Tasks from "./models/tasks.js";
-import { saveDB } from "./helpers/saveFile.js";
+import { saveDB,readDB } from "./helpers/saveFile.js";
 
 const main = async () => {
-  console.clear();
+  // console.clear();
   let opt;
   const tasks = new Tasks();
+  const tasksDB = readDB(); 
+  if(tasksDB){
+    tasks.loadArrayFromDB(tasksDB)
+  }
+  await pause();
   try {
     do {
       opt = await inquirerMenu();
@@ -18,11 +23,11 @@ const main = async () => {
           tasks.createTask(desc);
           break;
         case 2:
-          console.log(tasks.arrayList)
+          tasks.completedList()
           break;
       }
 
-      // saveDB(tasks.arrayList);
+      saveDB(tasks.arrayList);
 
       await pause();
     } while (opt !== 0);
