@@ -18,7 +18,6 @@ class Tasks {
     return arrList;
   }
 
-
   constructor() {
     this._list = {};
   }
@@ -29,20 +28,30 @@ class Tasks {
     const task = new Task(desc);
     this._list[task.id] = task;
   }
-  
+
   loadArrayFromDB(data = []) {
-  data.forEach((object) => {
-    this._list[object.id] = object;
-  });
-}
-  completedList(){
+    data.forEach((object) => {
+      this._list[object.id] = object;
+    });
+  }
+  allList() {
     console.log();
-      this.arrayList.forEach((task,i)=>{
+    this.arrayList.forEach((task, i) => {
       let idx = `${i + 1}`.green;
-      const completed = task.completed ? 'Completado'.green : 'Pendiente'.red
-      console.log(`${idx}.${task.desc} :: ${completed}`)    
-      i++
-    })
+      const completed = task.completed ? "Completado".green : "Pendiente".red;
+      console.log(`${idx}.${task.desc} :: ${completed}`);
+      i++;
+    });
+  }
+  completePendingList(completed = true) {
+      this.arrayList
+      .filter(task => completed ? task.completed : !task.completed )
+      .forEach((task, i) => {
+        let idx = `${i + 1}`.green;
+        const completed = task.completed ? "Completado".green : "Pendiente".red;
+        console.log(`${idx}.${task.desc} :: ${completed}`);
+        i++;
+      });
   }
 }
 
